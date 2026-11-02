@@ -8,9 +8,28 @@
 # constructors are used.
 set -e
 HERE="$(cd "$(dirname "$0")" && pwd)"
-LLVM="${LLVM:-$(brew --prefix llvm 2>/dev/null)/bin}"
-CLANG="${CLANG:-$LLVM/clang}"
-LLD="${LLD:-$(brew --prefix lld 2>/dev/null)/bin/ld.lld}"
+if [ -z "${CLANG:-}" ]; then
+    if [ -n "${LLVM:-}" ]; then
+        CLANG="$LLVM/clang"
+    elif command -v clang >/dev/null 2>&1; then
+        CLANG="$(command -v clang)"
+    elif command -v brew >/dev/null 2>&1; then
+        CLANG="$(brew --prefix llvm)/bin/clang"
+    else
+        echo "clang was not found; set CLANG or LLVM." >&2
+        exit 1
+    fi
+fi
+if [ -z "${LLD:-}" ]; then
+    if command -v ld.lld >/dev/null 2>&1; then
+        LLD="$(command -v ld.lld)"
+    elif command -v brew >/dev/null 2>&1; then
+        LLD="$(brew --prefix lld)/bin/ld.lld"
+    else
+        echo "ld.lld was not found; set LLD." >&2
+        exit 1
+    fi
+fi
 OUT="$HERE/build"
 CFLAGS="--target=armv7a-none-eabi -marm -mfloat-abi=soft -fPIC -Os -ffreestanding -nostdlib
  -fno-stack-protector -fno-builtin -fvisibility=hidden -std=c99 -Wall -Wextra -Werror
