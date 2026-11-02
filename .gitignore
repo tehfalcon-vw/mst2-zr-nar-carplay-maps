@@ -1,0 +1,7 @@
+build/
+hmi/build/
+native/build/
+*.log
+__pycache__/
+.pytest_cache/
+

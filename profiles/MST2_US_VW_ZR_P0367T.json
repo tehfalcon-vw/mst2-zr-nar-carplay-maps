@@ -1,0 +1,35 @@
+{
+  "release": "MST2_US_VW_ZR_P0367T",
+  "mu_version": "0367",
+  "vendor": "TechniSat",
+  "region": "USA",
+  "part_number": "3G0919360CG",
+  "hmi_version": "H28.28.197",
+  "files": {
+    "/tsd/lib/sal/carplay/libext.apple.carplay.airplay.so": {
+      "size": 184288,
+      "sha256": "d460c60dd69dd4602442075f3d067038a71505826b672aca926f4fc7456dc383",
+      "cksum": 138399033
+    },
+    "/usr/lib/libOpenMAXAL.so.1": {
+      "size": 205313,
+      "sha256": "854b81478566528749de37b2e299ce28e929ebfdb547af93960eaaf5a57789bd",
+      "cksum": 2039719450
+    },
+    "/tsd/bin/displaymanager/tsd.mibstd2.system.displaymanager": {
+      "size": 684640,
+      "sha256": "df0357569a2c764079a5b276cc7ed51bf61634bd35bc5aa10796b6c22b9b5f23",
+      "cksum": 1530731019
+    },
+    "/lib/dll/ipod-drvr-iap2.so": {
+      "size": 739315,
+      "sha256": "e77efea2cc4b2015dfb239dd5c7cd2d3b9166c47684de6317777bf6894023142",
+      "cksum": 2997072311
+    },
+    "/tsd/hmi/ifs/MIBHMI.jxe": {
+      "size": 39827618,
+      "sha256": "15c3dd1530540f8b757fe52124fc74de49bf2fcffef46eb6669e7c1d40a0805c",
+      "cksum": 3138870555
+    }
+  }
+}

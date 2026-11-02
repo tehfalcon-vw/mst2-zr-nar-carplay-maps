@@ -1,0 +1,28 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build tools
+        run: sudo apt-get update && sudo apt-get install -y clang lld zip
+      - name: Profile tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Native host checks
+        run: ./native/check.sh
+      - name: Build release package
+        env:
+          CLANG: clang
+          LLD: ld.lld
+        run: ./package.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mst2-zr-nar-carplay-maps-p0367t
+          path: build/mst2-zr-nar-carplay-maps-p0367t.zip
+
