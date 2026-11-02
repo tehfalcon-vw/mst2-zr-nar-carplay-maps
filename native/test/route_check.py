@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Host checks of the actual C decoder with sanitizers, no phone or vendor code."""
 import ctypes as C
+import os
 from pathlib import Path
 import struct
 import subprocess
@@ -10,7 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'build/check'
 OUT.mkdir(parents=True, exist_ok=True)
 LIB = OUT / 'route.dylib'
-subprocess.run(['clang', '-shared', '-fPIC', '-DMCN_HOST', '-std=c99', '-Wall', '-Wextra',
+HOST_CC = os.environ.get('HOST_CC', 'clang')
+subprocess.run([HOST_CC, '-shared', '-fPIC', '-DMCN_HOST', '-std=c99', '-Wall', '-Wextra',
                 '-Werror', '-fsanitize=undefined', '-fno-sanitize-recover=all',
                 '-I' + str(ROOT / 'include'), str(ROOT / 'src/common/route.c'),
                 '-o', str(LIB)], check=True)

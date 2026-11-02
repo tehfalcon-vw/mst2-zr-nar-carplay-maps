@@ -15,6 +15,8 @@ jobs:
       - name: Profile tests
         run: python3 -m unittest discover -s tests -v
       - name: Native host checks
+        env:
+          HOST_CC: gcc
         run: ./native/check.sh
       - name: Build release package
         env:

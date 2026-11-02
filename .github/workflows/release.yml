@@ -16,6 +16,8 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y clang lld zip
       - run: python3 -m unittest discover -s tests -v
       - run: ./native/check.sh
+        env:
+          HOST_CC: gcc
       - name: Build package
         env:
           CLANG: clang
